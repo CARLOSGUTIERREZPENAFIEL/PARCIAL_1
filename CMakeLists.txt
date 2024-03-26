@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(PARCIAL_1 LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_executable(PARCIAL_1 main.cpp
+    MODULO1.cpp
+    MODULO2.cpp
+    MODULOS.h)
+
+include(GNUInstallDirs)
+install(TARGETS PARCIAL_1
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
