@@ -1,20 +1,29 @@
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
-int** rotarM(int **matriz, int orden){
-    int **puntero_Rotar, nueva_posicion = orden;
-    puntero_Rotar = new int*[orden];
-    for(int i = 0; i< orden;i++){
-        puntero_Rotar[i] = new int[orden];
+void rotarM(int **matriz, unsigned int orden){
+    int **puntero_copia;
+    unsigned int nueva_posicion = orden;
+    puntero_copia = new int*[orden];
+    for(unsigned int i = 0; i< orden;i++){
+        puntero_copia[i] = new int[orden];
     }
-    for(int i = 0; i< orden;i++){
-        for(int j = 0; j< orden; j++){
-            puntero_Rotar[nueva_posicion -1][i] = matriz[i][j];
+    for(unsigned int i = 0; i< orden; i++){
+        for(unsigned int j = 0; j<orden; j++){
+            puntero_copia[i][j] = matriz[i][j];
+        }
+    }
+    for(unsigned int i = 0; i< orden;i++){
+        for(unsigned int j = 0; j< orden; j++){
+            matriz[nueva_posicion -1][i] = puntero_copia[i][j];
             nueva_posicion -= 1;
         }
         nueva_posicion = orden;
     }
-    return puntero_Rotar;
+    for(unsigned int i = 0; i<orden; i++){
+        delete[] puntero_copia[i];
+    }
+    delete[] puntero_copia;
 
 }
 int* validar_Regla(){
