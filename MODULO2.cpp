@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdlib.h>
 using namespace std;
 void rotarM(int **matriz, unsigned int orden){
     int **puntero_copia;
