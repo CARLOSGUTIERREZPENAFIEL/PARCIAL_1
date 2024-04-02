@@ -42,15 +42,15 @@ int* validar(){
         regla = new int[2];
         for(unsigned int i = 0; i<2; i++){
             if(i == 0){
-                cout<<"Ingresar un valor para K: "<<endl;
+                cout<<"Ingresar un valor para K, el cual sera la posicion fila: "<<endl;
                 cin>>regla[i];
             }
             else{
-                cout<<"Ingrese un valor para K: "<<endl;
+                cout<<"Ingrese un valor para K, el cual sera la posicion columna: "<<endl;
                 cin>>regla[i];
             }
         }
-        if((regla[0] >=3 || regla[1]>=3) && (regla[0]>0 && regla[1]>0)){
+        if(regla[0] >=1 && regla[1]>=1){
             confirmar = false;
         }
         else{
