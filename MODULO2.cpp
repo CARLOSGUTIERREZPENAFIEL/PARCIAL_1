@@ -54,7 +54,7 @@ int* validar(){
             confirmar = false;
         }
         else{
-            cout<<"has ingresado datos invalidos, debes ingresar algun dato mayor o igual a 3"<<endl;
+            cout<<"has ingresado datos invalidos, debes ingresar algun dato mayor o igual a 1"<<endl;
             delete[] regla;
         }
     }
