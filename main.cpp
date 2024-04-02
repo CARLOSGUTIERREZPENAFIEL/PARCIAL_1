@@ -19,6 +19,12 @@ int main()
     if ((nMayor%2)==0){
         nMayor++;
     }
+    else if(nMayor==1){
+        nMayor=3;
+    }
+    if(resultadoValidacion[1]==2 && resultadoValidacion[2]==2){
+        nMayor=5;
+    }
     int pCambiante1[2];
     pCambiante1[0] = resultadoValidacion[1];
     pCambiante1[1] = resultadoValidacion[2];
