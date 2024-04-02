@@ -1,5 +1,9 @@
 #include <iostream>
+#include "MODULOS.h"
+
 using namespace std;
+
+
 void rotarM(int **matriz, unsigned int orden){
     int **puntero_copia;
     unsigned int nueva_posicion = orden;
@@ -25,11 +29,14 @@ void rotarM(int **matriz, unsigned int orden){
     delete[] puntero_copia;
 
 }
+
+
+
 int* validar(){
     int* regla, *temporal;
     unsigned int capacidad, Nelementos;
     int dato, dimension = 2;
-    char continuar = 's';
+    char continuar = 'y';
     bool confirmar =  true;
     while(confirmar){
         regla = new int[2];
@@ -43,7 +50,7 @@ int* validar(){
                 cin>>regla[i];
             }
         }
-        if(regla[0] >2 || regla[1]>2){
+        if((regla[0] >=3 || regla[1]>=3) && (regla[0]>0 && regla[1]>0)){
             confirmar = false;
         }
         else{
@@ -51,7 +58,7 @@ int* validar(){
             delete[] regla;
         }
     }
-    while(continuar == 's' || continuar == 'S'){
+    while(continuar == 'y' || continuar == 'Y'){
         cout<<"ingresar un valor para K (-1,0,1): "<<endl;
         cin>>dato;
         if(dato == -1 || dato == 0 || dato == 1){
@@ -67,7 +74,7 @@ int* validar(){
                 regla[i]= temporal[i];
             }
             delete[] temporal;
-            cout<<"quiere ingresar otro valor para k? \n si es asi ingrese la letra 'S' sino ingrese otra letra : "<<endl;
+            cout<<"quiere ingresar otro valor para k? \n y/n: "<<endl;
             cin>> continuar;
         }
     }
@@ -81,48 +88,9 @@ int* validar(){
     return temporal;
 
 }
-bool comparar_arreglos(int** matriz1,int** matriz2, unsigned int fila, unsigned int columna, unsigned int fila_temp, unsigned int columna_temp, int condicion){
-    bool confirmar;
 
-    //funcion que retornar true o false dependiendo de si dos arreglos cumplen una condicion
-    unsigned int numero1,numero2;
-    if(condicion == -1){
-        if(matriz1[fila][columna] < matriz2[fila_temp][columna_temp]){
-            cout<<"m1 "<<matriz1[fila][columna]<<endl<<"m2 "<<matriz2[fila_temp][columna_temp]<<endl;
-            confirmar = true;
-        }
-        else{
-            confirmar = false;
-        }
-    }
-    else if(condicion == 0){
-        if(matriz1[fila][columna] == matriz2[fila_temp][columna_temp]){
-            confirmar = true;
-        }
-        else{
-            confirmar = false;
-        }
-    }
-    else if(condicion == 1){
-        if(matriz1[fila][columna] > matriz2[fila_temp][columna_temp]){
-            cout<<"m1 "<<matriz1[fila][columna]<<endl<<"m2 "<<matriz2[fila_temp][columna_temp]<<endl;
-            confirmar = true;
-        }
-        else{
-            confirmar = false;
-        }
-    }
 
-    return confirmar;
-
-}
-void liberar_memoria(int** matriz, unsigned int dimension){
-    for(unsigned int i = 0; i < dimension; ++i) {
-        delete[] matriz[i];
-    }
-    delete[] matriz;
-}
-void cambiar_matriz(int** matriz1,int** matriz2, unsigned int dimension){
+void cambiar_matriz(int**& matriz1,int** matriz2, unsigned int dimension){
     matriz1 = new int*[dimension];
     for(unsigned int i = 0; i< dimension; i++){
         matriz1[i] = new int[dimension];

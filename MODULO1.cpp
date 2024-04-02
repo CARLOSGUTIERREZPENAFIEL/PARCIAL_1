@@ -1,4 +1,5 @@
 #include <iostream>
+#include "MODULOS.h"
 
 using namespace std;
 
@@ -24,4 +25,44 @@ int** CrearM(unsigned int n) {
         ++inicio;
     }
     return M;
+}
+
+void liberar_memoria(int** matriz, unsigned int dimension){
+    for(unsigned int i = 0; i < dimension; ++i) {
+        delete[] matriz[i];
+    }
+    delete[] matriz;
+}
+
+
+bool comparar_arreglos(int** matriz1,int** matriz2, unsigned int fila, unsigned int columna, unsigned int fila_temp, unsigned int columna_temp, int condicion){
+    bool confirmar = false;
+
+    if(condicion == -1){
+        if(matriz1[fila][columna] < matriz2[fila_temp][columna_temp]){
+            confirmar = true;
+        }
+        else{
+            confirmar = false;
+        }
+    }
+    else if(condicion == 0){
+        if(matriz1[fila][columna] == matriz2[fila_temp][columna_temp]){
+            confirmar = true;
+        }
+        else{
+            confirmar = false;
+        }
+    }
+    else if(condicion == 1){
+        if(matriz1[fila][columna] > matriz2[fila_temp][columna_temp]){
+            confirmar = true;
+        }
+        else{
+            confirmar = false;
+        }
+    }
+
+    return confirmar;
+
 }
