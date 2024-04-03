@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_executable(PARCIAL_1 main.cpp
     MODULO1.cpp
     MODULO2.cpp
-    MODULOS.h
-    MODULO1.h)
+    MODULO1.h
+    MODULO2.h)
 
 include(GNUInstallDirs)
 install(TARGETS PARCIAL_1

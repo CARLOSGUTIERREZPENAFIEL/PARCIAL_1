@@ -9,7 +9,7 @@ int main()
     int** M_Base, **Matriz_B;
     int dimension;
     int nCambiante;
-    int c_Matricez;
+    int c_Matrices;
     int pCondicion = 3;
     int nMayor;
     int numero_validar_1;
@@ -42,9 +42,9 @@ int main()
     nCambiante = nMayor;
     M_Base = CrearM(nMayor);
     dimension = nMayor;
-    c_Matricez=resultadoValidacion[0]-1;
-    int X[c_Matricez];
-    int P[c_Matricez];
+    c_Matrices=resultadoValidacion[0]-1;
+    int X[c_Matrices];
+    int P[c_Matrices];
     int pArreglos = 1;
     Matriz_B = CrearM(nCambiante);
     if(pCambiante1[0] - 1 < nCambiante/2 && pCambiante1[1] -1 > nCambiante/2 || pCambiante1[0] - 1 > nCambiante/2 && pCambiante1[1] -1 < nCambiante/2){
@@ -78,7 +78,6 @@ int main()
                     }
 
                 }
-
 
                 Comparar =  comparar_arreglos(M_Base, Matriz_B, pCambiante1[0]-1, pCambiante1[1]-1, pCambiante2[0]-1, pCambiante2[1]-1, resultadoValidacion[pCondicion]);
 
@@ -139,19 +138,18 @@ int main()
         cout << resultadoValidacion[i] << ", ";
     }
     cout << resultadoValidacion[Tam_K] << ") una posible cerradura podria ser:" << endl << "X(";
-    for(int i = 0; i < c_Matricez-1; i++) {
+    for(int i = 0; i < c_Matrices-1; i++) {
         cout << X[i] << ", ";
     }
-    cout << X[c_Matricez-1] << ")" << endl << "Esta cerradura tendria las siguientes rotaciones en su respectivo orden a X:" << endl <<"R(";;
+    cout << X[c_Matrices-1] << ")" << endl << "Esta cerradura tendria las siguientes rotaciones en su respectivo orden a X:" << endl <<"R(";;
 
-    for(int i = 0; i < c_Matricez-1; i++) {
+    for(int i = 0; i < c_Matrices-1; i++) {
         cout << P[i] << ", ";
     }
-    cout << P[c_Matricez-1] << ")" << endl;
+    cout << P[c_Matrices-1] << ")" << endl;
     delete[] resultadoValidacion;
     liberar_memoria(M_Base, dimension);
     liberar_memoria(Matriz_B, nCambiante);
-
 
     return 0;
 }

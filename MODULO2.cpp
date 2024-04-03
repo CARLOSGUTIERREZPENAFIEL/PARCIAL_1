@@ -9,44 +9,57 @@ int* validar(){
     int dato, dimension = 2;
     char continuar = 'y';
     bool confirmar =  true;
-    while(confirmar){
+    while (confirmar) {
         regla = new int[2];
-        for(unsigned int i = 0; i<2; i++){
-            if(i == 0){
-                cout<<"Ingresar un valor para K, el cual sera la posicion fila: "<<endl;
-                cin>>regla[i];
+        for (unsigned int i = 0; i < 2; i++) {
+            if (i == 0) {
+                cout << "Ingrese un valor para K, el cual sera la posicion fila: " << endl;
+                cin >> regla[i];
+            } else {
+                cout << "Ingrese un valor para K, el cual sera la posicion columna: " << endl;
+                cin >> regla[i];
             }
-            else{
-                cout<<"Ingrese un valor para K, el cual sera la posicion columna: "<<endl;
-                cin>>regla[i];
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                break;
             }
         }
-        if(regla[0] >=1 && regla[1]>=1){
+        if (regla[0] >= 1 && regla[1] >= 1) {
             confirmar = false;
-        }
-        else{
-            cout<<"has ingresado datos invalidos, debes ingresar algun dato mayor o igual a 1"<<endl;
+        } else {
+            cout << "Has ingresado datos invalidos. Debes ingresar algun NUMERO mayor o igual a 1." << endl;
             delete[] regla;
         }
     }
-    while(continuar == 'y' || continuar == 'Y'){
-        cout<<"ingresar un valor para K (-1,0,1): "<<endl;
-        cin>>dato;
-        if(dato == -1 || dato == 0 || dato == 1){
+    while (continuar == 'y' || continuar == 'Y') {
+        cout << "Ingresar un valor para K (-1, 0, 1): " << endl;
+        int dato;
+        cin >> dato;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "El valor ingresado no es valido. Intente nuevamente." << endl;
+            continue;
+        }
+
+        if (dato == -1 || dato == 0 || dato == 1) {
             dimension += 1;
             temporal = new int[dimension];
-            for(unsigned int i = 0; i < dimension-1; i++){
+            for (unsigned int i = 0; i < dimension - 1; i++) {
                 temporal[i] = regla[i];
             }
-            temporal[dimension-1] = dato;
+            temporal[dimension - 1] = dato;
             delete[] regla;
             regla = new int[dimension];
-            for(unsigned int i = 0; i< dimension; i++ ){
-                regla[i]= temporal[i];
+            for (unsigned int i = 0; i < dimension; i++) {
+                regla[i] = temporal[i];
             }
             delete[] temporal;
-            cout<<"quiere ingresar otro valor para k? \n y/n: "<<endl;
-            cin>> continuar;
+            cout << "Quiere ingresar otro valor para K? (y/n): ";
+            cin >> continuar;
+        } else {
+            cout << "El valor ingresado no es valido. Intente nuevamente." << endl;
         }
     }
     temporal = new int[dimension+1];
@@ -54,10 +67,8 @@ int* validar(){
     for(unsigned int i = 1; i<= dimension; i++){
         temporal[i] = regla[i-1];
     }
-
     delete[] regla;
     return temporal;
-
 }
 
 
