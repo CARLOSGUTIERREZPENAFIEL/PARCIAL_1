@@ -1,36 +1,7 @@
 #include <iostream>
-#include "MODULOS.h"
+#include "MODULO2.h"
 
 using namespace std;
-
-
-void rotarM(int **matriz, unsigned int orden){
-    int **puntero_copia;
-    unsigned int nueva_posicion = orden;
-    puntero_copia = new int*[orden];
-    for(unsigned int i = 0; i< orden;i++){
-        puntero_copia[i] = new int[orden];
-    }
-    for(unsigned int i = 0; i< orden; i++){
-        for(unsigned int j = 0; j<orden; j++){
-            puntero_copia[i][j] = matriz[i][j];
-        }
-    }
-    for(unsigned int i = 0; i< orden;i++){
-        for(unsigned int j = 0; j< orden; j++){
-            matriz[nueva_posicion -1][i] = puntero_copia[i][j];
-            nueva_posicion -= 1;
-        }
-        nueva_posicion = orden;
-    }
-    for(unsigned int i = 0; i<orden; i++){
-        delete[] puntero_copia[i];
-    }
-    delete[] puntero_copia;
-
-}
-
-
 
 int* validar(){
     int* regla, *temporal;
@@ -90,15 +61,42 @@ int* validar(){
 }
 
 
-void cambiar_matriz(int**& matriz1,int** matriz2, unsigned int dimension){
-    matriz1 = new int*[dimension];
-    for(unsigned int i = 0; i< dimension; i++){
-        matriz1[i] = new int[dimension];
+void liberar_memoria(int** matriz, unsigned int dimension){
+    for(unsigned int i = 0; i < dimension; ++i) {
+        delete[] matriz[i];
     }
-    for(unsigned int i = 0; i< dimension; i++){
-        for(unsigned int j = 0; j< dimension; j++){
-            matriz1[i][j] = matriz2[i][j];
+    delete[] matriz;
+}
+
+
+bool comparar_arreglos(int** matriz1,int** matriz2, unsigned int fila, unsigned int columna, unsigned int fila_temp, unsigned int columna_temp, int condicion){
+    bool confirmar = false;
+
+    if(condicion == -1){
+        if(matriz1[fila][columna] < matriz2[fila_temp][columna_temp]){
+            confirmar = true;
+        }
+        else{
+            confirmar = false;
         }
     }
+    else if(condicion == 0){
+        if(matriz1[fila][columna] == matriz2[fila_temp][columna_temp]){
+            confirmar = true;
+        }
+        else{
+            confirmar = false;
+        }
+    }
+    else if(condicion == 1){
+        if(matriz1[fila][columna] > matriz2[fila_temp][columna_temp]){
+            confirmar = true;
+        }
+        else{
+            confirmar = false;
+        }
+    }
+
+    return confirmar;
 
 }

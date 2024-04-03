@@ -1,15 +1,25 @@
 #include <iostream>
-#include "MODULOS.h"
+#include "MODULO2.h"
+#include "MODULO1.h"
 using namespace std;
 
 int main()
 {
-
+    bool Comparar ;
+    int** M_Base, **Matriz_B;
+    int dimension;
+    int nCambiante;
+    int c_Matricez;
     int pCondicion = 3;
     int nMayor;
+    int numero_validar_1;
     int* resultadoValidacion = validar();
     int Tam_K = resultadoValidacion[0];
     int Condiciones = Tam_K-2;
+    int pCambiante1[2];
+    int pCambiante2[2];
+
+
     if (resultadoValidacion[1] > resultadoValidacion[2]){
         nMayor = resultadoValidacion[1];
     }
@@ -25,29 +35,50 @@ int main()
     if(resultadoValidacion[1]==2 && resultadoValidacion[2]==2){
         nMayor=5;
     }
-    int pCambiante1[2];
     pCambiante1[0] = resultadoValidacion[1];
     pCambiante1[1] = resultadoValidacion[2];
-    int pCambiante2[2];
     pCambiante2[0] = pCambiante1[0];
     pCambiante2[1] = pCambiante1[1];
-    int nCambiante = nMayor;
-    int** M_Base = CrearM(nMayor);
-    int dimension = nMayor;
-    int c_Matricez=resultadoValidacion[0]-1;
+    nCambiante = nMayor;
+    M_Base = CrearM(nMayor);
+    dimension = nMayor;
+    c_Matricez=resultadoValidacion[0]-1;
     int X[c_Matricez];
     int P[c_Matricez];
     int pArreglos = 1;
-    int** Matriz_B = CrearM(nCambiante);
+    Matriz_B = CrearM(nCambiante);
+    if(pCambiante1[0] - 1 < nCambiante/2 && pCambiante1[1] -1 > nCambiante/2 || pCambiante1[0] - 1 > nCambiante/2 && pCambiante1[1] -1 < nCambiante/2){
+        numero_validar_1 = 1;
+
+    }
+    else if(pCambiante1[0] - 1 < nCambiante/2 && pCambiante1[1] -1 <= nCambiante/2){
+        numero_validar_1 =0;
+    }
+    else{
+        numero_validar_1 = 2;
+    }
     X[0]=nMayor;
     P[0]=0;
 
     while(Condiciones >= 1){
-        bool Comparar = false;
+        Comparar = false;
         while(Comparar == false){
             int rotacion=0;
 
             while(rotacion<=3){
+                if(nCambiante == dimension ){
+                    if(numero_validar_1 == 0){
+                        if(resultadoValidacion[pCondicion] == 1){
+                            cout<<"La condiciones ingresadas no son validas"<<endl;
+                            liberar_memoria(M_Base,dimension);
+                            liberar_memoria(Matriz_B, nCambiante);
+                            delete[] resultadoValidacion;
+                            return 0;
+                        }
+                    }
+
+                }
+
 
                 Comparar =  comparar_arreglos(M_Base, Matriz_B, pCambiante1[0]-1, pCambiante1[1]-1, pCambiante2[0]-1, pCambiante2[1]-1, resultadoValidacion[pCondicion]);
 
@@ -57,6 +88,9 @@ int main()
 
                 }
                 else{
+
+                    numero_validar_1 -= 1;
+
                     X[pArreglos]=nCambiante;
                     P[pArreglos]=rotacion;
                     pArreglos++;
@@ -79,17 +113,18 @@ int main()
                     liberar_memoria(Matriz_B, nCambiante);
                     nCambiante+=2;
                     Matriz_B = CrearM(nCambiante);
+                    numero_validar_1 += 1;
 
                     if(dimension < nCambiante){
                         pCambiante1[0] = pCambiante2[0];
                         pCambiante1[1] = pCambiante2[1];
                         pCambiante2[0]++;
                         pCambiante2[1]++;
-
                     }
                     else{
                         pCambiante2[0]++;
                         pCambiante2[1]++;
+
                     }
                 }
             }
@@ -116,6 +151,7 @@ int main()
     delete[] resultadoValidacion;
     liberar_memoria(M_Base, dimension);
     liberar_memoria(Matriz_B, nCambiante);
+
 
     return 0;
 }
