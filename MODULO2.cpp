@@ -5,13 +5,10 @@ using namespace std;
 
 int* validar(){
     int* regla, *temporal;
-    unsigned int capacidad, Nelementos;
-    int dato, dimension = 2;
-    char continuar = 'y';
-    bool confirmar =  true;
-    while (confirmar) {
+    unsigned int capacidad, Nelementos, dimension = 2;
+    while (true) {
         regla = new int[2];
-        for (unsigned int i = 0; i < 2; i++) {
+        for (unsigned short int i = 0; i < 2; i++) {
             if (i == 0) {
                 cout << "Ingrese un valor para K, el cual sera la posicion fila: " << endl;
                 cin >> regla[i];
@@ -26,15 +23,15 @@ int* validar(){
             }
         }
         if (regla[0] >= 1 && regla[1] >= 1) {
-            confirmar = false;
+            break;
         } else {
             cout << "Has ingresado datos invalidos. Debes ingresar algun NUMERO mayor o igual a 1." << endl;
             delete[] regla;
         }
     }
-    while (continuar == 'y' || continuar == 'Y') {
-        cout << "Ingresar un valor para K (-1, 0, 1): " << endl;
-        int dato;
+    while (true) {
+        cout << "Ingresar un valor para K (-1, 0, 1), cuando quiera parar, ingrese '-2': " << endl;
+        short int dato;
         cin >> dato;
         if (cin.fail()) {
             cin.clear();
@@ -56,9 +53,12 @@ int* validar(){
                 regla[i] = temporal[i];
             }
             delete[] temporal;
-            cout << "Quiere ingresar otro valor para K? (y/n): ";
-            cin >> continuar;
-        } else {
+
+        }
+        else if(dato==-2){
+            break;
+        }
+        else {
             cout << "El valor ingresado no es valido. Intente nuevamente." << endl;
         }
     }

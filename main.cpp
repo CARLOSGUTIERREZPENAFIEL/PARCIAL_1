@@ -7,17 +7,18 @@ int main()
 {
     bool Comparar ;
     int** M_Base, **Matriz_B;
-    int dimension;
-    int nCambiante;
-    int c_Matrices;
-    int pCondicion = 3;
-    int nMayor;
-    int numero_validar_1;
+    unsigned int dimension;
+    unsigned int nCambiante;
+    unsigned int c_Matrices;
+    unsigned int pCondicion = 3;
+    unsigned int nMayor;
+    unsigned int numero_validar_1;
     int* resultadoValidacion = validar();
-    int Tam_K = resultadoValidacion[0];
-    int Condiciones = Tam_K-2;
-    int pCambiante1[2];
-    int pCambiante2[2];
+    unsigned int Tam_K = resultadoValidacion[0];
+    unsigned int Condiciones = Tam_K-2;
+    unsigned int pCambiante1[2];
+    unsigned int pCambiante2[2];
+
 
 
     if (resultadoValidacion[1] > resultadoValidacion[2]){
@@ -63,7 +64,7 @@ int main()
     while(Condiciones >= 1){
         Comparar = false;
         while(Comparar == false){
-            int rotacion=0;
+            unsigned int rotacion=0;
 
             while(rotacion<=3){
                 if(nCambiante == dimension ){
@@ -134,16 +135,16 @@ int main()
 
     }
     cout << "Para una regla K: (";
-    for(int i = 1; i < Tam_K; i++) {
+    for(unsigned int i = 1; i < Tam_K; i++) {
         cout << resultadoValidacion[i] << ", ";
     }
     cout << resultadoValidacion[Tam_K] << ") una posible cerradura podria ser:" << endl << "X(";
-    for(int i = 0; i < c_Matrices-1; i++) {
+    for(unsigned int i = 0; i < c_Matrices-1; i++) {
         cout << X[i] << ", ";
     }
     cout << X[c_Matrices-1] << ")" << endl << "Esta cerradura tendria las siguientes rotaciones en su respectivo orden a X:" << endl <<"R(";;
 
-    for(int i = 0; i < c_Matrices-1; i++) {
+    for(unsigned int i = 0; i < c_Matrices-1; i++) {
         cout << P[i] << ", ";
     }
     cout << P[c_Matrices-1] << ")" << endl;
