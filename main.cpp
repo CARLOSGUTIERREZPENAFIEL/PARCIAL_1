@@ -5,8 +5,8 @@ using namespace std;
 
 int main()
 {
-    bool Comparar ;
-    int** M_Base, **Matriz_B;
+    bool Comparar , validar_condicion;
+    int** M_Base, **Matriz_B, **Matriz_original;
     unsigned int dimension;
     unsigned int nCambiante;
     unsigned int c_Matrices;
@@ -42,24 +42,16 @@ int main()
     pCambiante2[1] = pCambiante1[1];
     nCambiante = nMayor;
     M_Base = CrearM(nMayor);
+    Matriz_original = CrearM(nMayor);
     dimension = nMayor;
     c_Matrices=resultadoValidacion[0]-1;
     int X[c_Matrices];
     int P[c_Matrices];
     int pArreglos = 1;
     Matriz_B = CrearM(nCambiante);
-    if(pCambiante1[0] - 1 < nCambiante/2 && pCambiante1[1] -1 > nCambiante/2 || pCambiante1[0] - 1 > nCambiante/2 && pCambiante1[1] -1 < nCambiante/2){
-        numero_validar_1 = 1;
-
-    }
-    else if(pCambiante1[0] - 1 < nCambiante/2 && pCambiante1[1] -1 <= nCambiante/2){
-        numero_validar_1 =0;
-    }
-    else{
-        numero_validar_1 = 2;
-    }
     X[0]=nMayor;
     P[0]=0;
+
 
     while(Condiciones >= 1){
         Comparar = false;
@@ -67,17 +59,17 @@ int main()
             unsigned int rotacion=0;
 
             while(rotacion<=3){
-                if(nCambiante == dimension ){
-                    if(numero_validar_1 == 0){
-                        if(resultadoValidacion[pCondicion] == 1){
-                            cout<<"La condiciones ingresadas no son validas"<<endl;
-                            liberar_memoria(M_Base,dimension);
-                            liberar_memoria(Matriz_B, nCambiante);
-                            delete[] resultadoValidacion;
-                            return 0;
-                        }
-                    }
+                if(resultadoValidacion[pCondicion] == 1){
+                    validar_condicion = verificar_condicion(Matriz_original,nMayor,M_Base[pCambiante1[0]-1][pCambiante1[1]-1]);
+                    if(validar_condicion == true){
+                        cout<< "No se puede crear una cerradura con la clave ingresada"<< endl;
+                        delete[] resultadoValidacion;
+                        liberar_memoria(M_Base, dimension);
+                        liberar_memoria(Matriz_B, nCambiante);
+                        liberar_memoria(Matriz_original,nMayor);
+                        return 0;
 
+                    }
                 }
 
                 Comparar =  comparar_arreglos(M_Base, Matriz_B, pCambiante1[0]-1, pCambiante1[1]-1, pCambiante2[0]-1, pCambiante2[1]-1, resultadoValidacion[pCondicion]);

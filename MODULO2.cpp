@@ -111,3 +111,39 @@ bool comparar_arreglos(int** matriz1,int** matriz2, unsigned int fila, unsigned 
     return confirmar;
 
 }
+bool verificar_condicion(int** matriz_base,unsigned int orden,unsigned int numero_comprobar){
+    int** matriz_aux = nullptr;
+    bool comprobar = false;
+    unsigned int centro, numeros = 1;
+    centro = orden/2;
+    matriz_aux = new int*[centro];
+    for(unsigned int filas = 0; filas < centro; filas++){
+        matriz_aux[filas] = new int[centro+1];
+    }
+    for(unsigned int fila = 0; fila< centro; fila++){
+        for(unsigned int columna = 0; columna<= centro; columna++){
+            matriz_aux[fila][columna]= numeros;
+            numeros += 1;
+        }
+        numeros += 2;
+    }
+    for(unsigned int fila = 0; fila< centro; fila++){
+        for(unsigned int columna = 0; columna<= centro; columna++){
+            if(matriz_aux[fila][columna] == numero_comprobar){
+                comprobar = true;
+                for(unsigned int i = 0; i < centro; ++i) {
+                    delete[] matriz_aux[i];
+                }
+                delete[] matriz_aux;
+                return comprobar;
+            }
+        }
+
+    }
+    for(unsigned int i = 0; i < centro; ++i) {
+        delete[] matriz_aux[i];
+    }
+    delete[] matriz_aux;
+    return comprobar;
+
+}
