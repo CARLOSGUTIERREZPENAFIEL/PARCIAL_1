@@ -135,6 +135,7 @@ int main()
     delete[] resultadoValidacion;
     liberar_memoria(M_Base, dimension);
     liberar_memoria(Matriz_B, nCambiante);
+    liberar_memoria(Matriz_original,nMayor);
 
     return 0;
 }
