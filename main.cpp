@@ -12,7 +12,6 @@ int main()
     unsigned int c_Matrices;
     unsigned int pCondicion = 3;
     unsigned int nMayor;
-    unsigned int numero_validar_1;
     int* resultadoValidacion = validar();
     unsigned int Tam_K = resultadoValidacion[0];
     unsigned int Condiciones = Tam_K-2;
@@ -81,7 +80,6 @@ int main()
                 }
                 else{
 
-                    numero_validar_1 -= 1;
 
                     X[pArreglos]=nCambiante;
                     P[pArreglos]=rotacion;
@@ -105,19 +103,13 @@ int main()
                     liberar_memoria(Matriz_B, nCambiante);
                     nCambiante+=2;
                     Matriz_B = CrearM(nCambiante);
-                    numero_validar_1 += 1;
 
-                    if(dimension < nCambiante){
-                        pCambiante1[0] = pCambiante2[0];
-                        pCambiante1[1] = pCambiante2[1];
-                        pCambiante2[0]++;
-                        pCambiante2[1]++;
-                    }
-                    else{
-                        pCambiante2[0]++;
-                        pCambiante2[1]++;
 
-                    }
+
+                    pCambiante2[0]++;
+                    pCambiante2[1]++;
+
+
                 }
             }
         }
